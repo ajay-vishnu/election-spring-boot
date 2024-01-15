@@ -21,6 +21,7 @@ public class ElectionService {
     ElectionObject electionObject = new ElectionObject();
     electionObject.setCandidateName(candidateName);
     electionObject.setVoteCount(0);
+    save(electionObject);
   }
 
   public void castvote(String candidateName) {
@@ -32,6 +33,8 @@ public class ElectionService {
       ElectionObject electionObject = optionalObject.get();
       Integer voteCount = electionObject.getVoteCount();
       electionObject.setVoteCount(voteCount + 1);
+    }else {
+      throw new IllegalStateException("Candidate doesn't exist");
     }
   }
 

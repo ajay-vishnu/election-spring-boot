@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,23 +16,23 @@ public class ElectionController {
 
   @Autowired
   ElectionService electionService;
-  @PostMapping(path = "{candidateName}")
 
-  public void enterCandidate(@PathVariable("candidateName") String candidateName)  {
-    electionService.enterCandidate(candidateName);
+  @PostMapping(path = "entercandidate")
+  public void enterCandidate(@RequestParam String name)  {
+    electionService.enterCandidate(name);
   }
 
-  @PutMapping(path = "{candidateName}")
-  public void castvote(@PathVariable("candidateName") String candidateName)  {
-    electionService.castvote(candidateName);
+  @PutMapping(path = "castvote")
+  public void castvote(@RequestParam String name)  {
+    electionService.castvote(name);
   }
 
-  @GetMapping(path = "{candidateName}")
-  public Integer countvote(@PathVariable("candidateName") String candidateName)  {
-    return electionService.countvote(candidateName);
+  @GetMapping(path = "countvote")
+  public Integer countvote(@RequestParam String name)  {
+    return electionService.countvote(name);
   }
 
-  @GetMapping
+  @GetMapping(path = "listvote")
   public Map<Long, ElectionObject> listvote()  {
     return electionService.listvote();
   }
